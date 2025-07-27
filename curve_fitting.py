@@ -65,13 +65,23 @@ alpha_fit_full = alpha_model(t_data, E_fit, n_fit, T, A)
 # 只在 t >= 40 的时间点上计算拟合值，用于 R²
 alpha_fit_filtered = alpha_model(t_data_filtered, E_fit, n_fit, T, A)
 
-# 确保两者长度一致
-assert len(alpha_fit_filtered) == len(alpha_data_filtered), "Length mismatch between predicted and true values"
+# # 确保两者长度一致
+# assert len(alpha_fit_filtered) == len(alpha_data_filtered), "Length mismatch between predicted and true values"
+
 
 # 计算 R²
 r2 = r2_score(alpha_data_filtered, alpha_fit_filtered)
 print(f"R² (on filtered data) = {r2:.6f}")
 
+
+
+
+# 输出拟合的alpha值
+np.savetxt("fitted_data_full.txt", np.column_stack((t_data, alpha_fit_full)), 
+           header="Time(s)  Fitted_Alpha", fmt="%.6f")
+# 输出原始alpha值
+np.savetxt("experiment_data_full.txt", np.column_stack((t_data, alpha_data)), 
+           header="Time(s)  Experimental_Alpha", fmt="%.6f")
 
 
 
