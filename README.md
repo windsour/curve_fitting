@@ -1,2 +1,3 @@
 用来进行固化方程中A、活化能E和反应级数n的拟合
+
 需要用到numpy、scipy、matplotlib以及sklearn库
