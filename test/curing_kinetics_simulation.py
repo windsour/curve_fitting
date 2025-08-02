@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
 # ================== 参数设置 ==================
-A = 6.47e+05        # 频率因子 (s^-1)
-Ea = 70008.58       # 活化能 (J/mol)
+A = 7.06e5       # 频率因子 (s^-1)
+Ea = 69999.87       # 活化能 (J/mol)
 R = 8.314           # 气体常数 (J/(mol·K))
 T = 338             # 温度 (K)
-n = 0.66            # 反应级数
-alpha0 = 0.01109    # 初始固化度
+n = 0.86            # 反应级数
+alpha0 =0    # 初始固化度
 
 # 计算速率常数 k
 k = A * np.exp(-Ea / (R * T))

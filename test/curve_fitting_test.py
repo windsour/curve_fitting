@@ -9,9 +9,10 @@ def d_alpha_dt(E, n, alpha, T, A):
     return A * np.exp(-E / (R * T)) * (1 - alpha)**n
 
 def alpha_model(t, E, n, T, A, alpha0=0):
-    dt = t[1] - t[0]  # 时间步长
-    alpha = [alpha0]       # 初始 alpha = 0
+    # dt = t[1] - t[0]  # 时间步长
+    alpha = [alpha0]       # 初始 alpha
     for i in range(1, len(t)):
+        dt = t[i] - t[i-1]
         d_alpha = d_alpha_dt(E, n, alpha[-1], T, A) * dt
         alpha.append(alpha[-1] + d_alpha)
     return np.array(alpha)
@@ -33,7 +34,7 @@ alpha_data = np.array([0.01109, 0.04879, 0.09647, 0.14859, 0.1996, 0.25171, 0.29
                        0.96804, 0.96915, 0.9747, 0.97802, 0.98024, 0.98357, 0.98579, 0.98911, 0.99022])
 
 T = 338  # 温度 (K)
-alpha_stabilization_time = 0          #固化度基本达到稳定稳定状态的时间节点
+alpha_stabilization_time = 50000          #固化度基本达到稳定稳定状态的时间节点
 
 # 筛选稳定后的数据
 mask = t_data >= alpha_stabilization_time
@@ -58,7 +59,7 @@ params, covariance = curve_fit(
 # 输出拟合结果
 E_fit, n_fit, A_fit, alpha0_fit = params
 print(f"Fitted parameters: E = {E_fit:.2f}, n = {n_fit:.2f}, A = {A_fit:.2e}, alpha0 = {alpha0_fit:.4f}")
-print(f"Uncertainties:     ±{np.sqrt(covariance[0,0]):.2f}, ±{np.sqrt(covariance[1,1]):.2f}, ±{np.sqrt(covariance[2,2]):.2e}")
+print(f"Uncertainties:     E:±{np.sqrt(covariance[0,0]):.2f}, n:±{np.sqrt(covariance[1,1]):.2f}, A:±{np.sqrt(covariance[2,2]):.2e}, alpha0:±{np.sqrt(covariance[3,3]):.4f}")
 
 
 # 使用拟合参数计算拟合曲线（完整时间范围，用于绘图）
