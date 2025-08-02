@@ -62,6 +62,11 @@ print(f"Fitted parameters: E = {E_fit:.2f}, n = {n_fit:.2f}, A = {A_fit:.2e}, al
 print(f"Uncertainties:     E:±{np.sqrt(covariance[0,0]):.2f}, n:±{np.sqrt(covariance[1,1]):.2f}, A:±{np.sqrt(covariance[2,2]):.2e}, alpha0:±{np.sqrt(covariance[3,3]):.4f}")
 
 
+
+print("covariance:", covariance)                                                       #输出协方差矩阵
+
+
+
 # 使用拟合参数计算拟合曲线（完整时间范围，用于绘图）
 alpha_fit_full = alpha_model(t_data, E_fit, n_fit, T, A_fit, alpha0_fit)
 
@@ -106,7 +111,7 @@ print("alpha_data:", alpha_data)                                        #输出�
 
 
 # # 输出稳定后的原始实验数据和预测拟合数据
-# print("alpha_data_filtered:", alpha_data_filtered)                    #输出稳定后的实验数据
+print("alpha_data_filtered:", alpha_data_filtered)                    #输出稳定后的实验数据
 print("alpha_pred_filtered:", alpha_fit_filtered)                       #输出稳定后的拟合数据
 # print("alpha_data_filtered_avg:", np.mean(alpha_data_filtered))       #输出稳定后的实验数据平均值
 
